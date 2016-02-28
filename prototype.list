@@ -1,0 +1,215 @@
+//-------------------------------------------------------------------
+// File		:hw4.C
+// Author	:Michael Benson
+// Course	:CS1129
+// Date		:April 5, 2006
+//-------------------------------------------------------------------
+
+#include <iostream>
+#include <cstdlib>
+#include <fstream>
+#include <cctype>
+#include <cstring>
+
+using namespace std;
+
+// Class Definitions
+
+class Song
+{
+	public:
+		Song(); // Empty Constructor
+
+		//---------------------------------------------------
+		// readInData(ifstream&)
+		// Will read in all data fields from a text file
+		//---------------------------------------------------
+		void readInData(ifstream& inStream);
+
+		//---------------------------------------------------
+		// writeSongData(ofstream&)
+		// Writes out formatted data from the song
+		//---------------------------------------------------
+		void writeSongData(ofstream& outStream);
+	
+		//---------------------------------------------------
+		// addTitle()
+		// Will re-write the title data member
+		//---------------------------------------------------
+		void addTitle();
+
+		//---------------------------------------------------
+		// addArtist()
+		// Will re-write the artist data member
+		//---------------------------------------------------
+		void addArtist();
+
+		//---------------------------------------------------
+		// addAlbum()
+		// Will re-write the album data member
+		//---------------------------------------------------
+		void addAlbum();
+		
+		//---------------------------------------------------
+		// addGenre()
+		// Will re-write the genre data member
+		//---------------------------------------------------
+		void addGenre();
+
+		//---------------------------------------------------
+		// addRating()
+		// Will re-write the rating data member
+		//---------------------------------------------------
+		void addRating();
+
+		//---------------------------------------------------
+		// displayGenres()
+		// Will display all useable genre options
+		//---------------------------------------------------
+		void displayGenres();
+
+		//---------------------------------------------------
+		// genreTranslate()
+		// Will print out the genre data member and return a
+		// T/F value if it is a valid genre
+		//---------------------------------------------------
+		bool genreTranslate();
+
+		//---------------------------------------------------
+		// ratingTranslate()
+		// Will print out the rating data member and return a
+		// T/F value if it is a vaid rating
+		//---------------------------------------------------
+		bool ratingTranslate();
+		
+		//---------------------------------------------------
+		// displaySongData()
+		// Prints out formatted data from the Song
+		//---------------------------------------------------
+		void displaySongData();
+
+		//---------------------------------------------------
+		// empty()
+		// Returns a T/F based on if the song has any data
+		// stored in it yet
+		//---------------------------------------------------
+		bool empty();
+
+	private:
+		string title;
+		string artist;
+		string album;
+		char genre;
+		int rating;
+};
+
+class Library
+{
+	public:
+		Library(); // Empty Constructor
+		
+		//---------------------------------------------------
+		// openInput(ifstream&)
+		// Opens the input file for reading
+		//---------------------------------------------------
+		void openInput(ifstream& inStream);
+
+		//---------------------------------------------------
+		// openOutput(ofstream&)
+		// Opens the output file for writing
+		//---------------------------------------------------
+		void openOutput(ofstream& outStream);
+
+		//---------------------------------------------------
+		// loadLibrary(ifstream&)
+		// Loads data from the input file into memory
+		//---------------------------------------------------
+		void loadLibrary(ifstream& inStream);
+
+		//---------------------------------------------------
+		// skipSpaces(ifstream&)
+		// Utility function to skip spaces in the ifstream
+		// May be depricated pending new media lib format
+		//---------------------------------------------------
+		void skipSpaces(ifstream& inStream);
+		
+		//---------------------------------------------------
+		// addSong()
+		// Adds a song to the library
+		//---------------------------------------------------
+		void addSong();
+
+		//---------------------------------------------------
+		// removeSong()
+		// Removes a song from the library
+		//---------------------------------------------------
+		void removeSong();
+
+		//---------------------------------------------------
+		// libStatus()
+		// Prints out formatted data about the library
+		//---------------------------------------------------
+		void libStatus();
+
+		//---------------------------------------------------
+		// writeLib()
+		// Writes out the contents of the library
+		//---------------------------------------------------
+		void writeLib();
+
+		//---------------------------------------------------
+		// viewLib()
+		// Prints out formatted data from the library
+		//---------------------------------------------------
+		void viewLib();
+
+	private:
+		int libSize;
+		
+		// Pending change if data structure of library moved
+		// to a linked list format
+		Song libData[100];
+};
+
+// General Use Functions
+
+//----------------------------------------------------
+// splashScreen();
+// Displays the softwares splash screen at start up
+//----------------------------------------------------
+void splashScreen();
+
+//-------------------------------------------------------------------
+// mainMenu();
+// Displays menu options and prompts for and returns user input
+//-------------------------------------------------------------------
+int mainMenu();
+
+//-------------------------------------------------------------------
+// menuControl();
+// Handles user input from mainMenu() directs to appropiate functions
+//-------------------------------------------------------------------
+void menuControl();
+
+//-------------------------------------------------------------------
+// confirm();
+// Prompts for user confirmation of there previous action
+// Will be called in many Library level and Song level functions
+//-------------------------------------------------------------------
+bool confirm();
+
+//-------------------------------------------------------------------
+// getNoError(char&);
+// Calls cin.get(char*) to retrieve input from the user
+// without the usuall cin carriage return infinite loop bug
+// Will be used in Library, Song, and Main() calls
+//-------------------------------------------------------------------
+void getNoError(char&);
+
+//-------------------------------------------------------------------
+// getNoError(string&, int);
+// Calls cin.get(char*, int, char) to retrieve input from the user
+// without the usuall cin carriage return infinite loop bug
+// Will be used in Library, Song, and Main() calls
+//-------------------------------------------------------------------
+void getNoError(string& input, int length);
